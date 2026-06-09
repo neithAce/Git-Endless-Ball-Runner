@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Clips")]
     public AudioClip coinClip;
+    public AudioClip diamondClip;
     public AudioClip destroyClip;
     public AudioClip menuMusic;
     public AudioClip inGameMusic;

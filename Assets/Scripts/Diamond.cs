@@ -8,6 +8,7 @@ public class Diamond : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.diamondClip);
             DiamondManager.instance.AddDiamond(diamondValue);
             Destroy(gameObject);
         }

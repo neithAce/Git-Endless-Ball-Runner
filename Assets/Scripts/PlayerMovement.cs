@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float lateralForce = 15f;
     public float maxLateralPosition = 3f;
     public float targetSpeed = 100f;
+    public float visualRotationMultiplier = 5f;
 
     private Rigidbody rb;
 
@@ -19,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     {
         ForwardMovement();
         LateralMovement();
+
+        float rotationSpeed = rb.linearVelocity.z * visualRotationMultiplier;
+        transform.Rotate(rotationSpeed * Time.fixedDeltaTime, 0f, 0f, Space.Self);
     }
 
     void ForwardMovement()
