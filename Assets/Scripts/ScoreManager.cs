@@ -6,8 +6,10 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance; //singleton for global access
 
     public TextMeshProUGUI TxtScore;
+    public TextMeshProUGUI TxtBestScore;
 
     private int totalScore;
+    private int bestScore;
 
     public int distanceMultiplier = 1;
 
@@ -25,6 +27,8 @@ public class ScoreManager : MonoBehaviour
         }
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        TxtBestScore.text = "BEST: " + bestScore;
     }
 
     private void Update()
@@ -35,7 +39,15 @@ public class ScoreManager : MonoBehaviour
     public void UpdateScore()
     {
         totalScore = Mathf.FloorToInt(player.position.z * distanceMultiplier);
+        if(totalScore > bestScore)
+        {
+            bestScore = totalScore;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            PlayerPrefs.Save();
+        }
+
         TxtScore.text = totalScore.ToString();
+        TxtBestScore.text = "BEST: " + bestScore;
     }
 
     public int GetScore()

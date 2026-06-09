@@ -4,10 +4,12 @@ public class ObstacleGenerator : MonoBehaviour
 {
     public GameObject[] obstaclePrefabs;
     public GameObject[] coinPrefabs;
+    public GameObject diamondPrefab;
     public Transform player;
     public Vector3 spawnPosition;
 
     public float coinChance = 0.3f;
+    public float diamondChance = 0.1f;
     public float distanceBetweenObstacles = 15f;
     public float horizonDistance = 200f;
 
@@ -23,11 +25,18 @@ public class ObstacleGenerator : MonoBehaviour
             int x = Random.Range(-3, 4);
             spawnPosition = new Vector3(x, 1.5f, spawnPosition.z + distanceBetweenObstacles);
 
-            if (Random.value < coinChance)
+            float randomValue = Random.value;
+
+            if (randomValue < diamondChance)
+            {
+                spawnPosition.y = 0.8f;
+                Instantiate(diamondPrefab, spawnPosition, Quaternion.identity);
+            }
+            else if(randomValue < diamondChance + coinChance)
             {
                 spawnPosition.y = 0.6f;
                 GameObject coinPrefab = coinPrefabs[Random.Range(0, coinPrefabs.Length)];
-                for(int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     Vector3 coinPosition = spawnPosition + new Vector3(0, 0, i * 2f);
                     Instantiate(coinPrefab, coinPosition, Quaternion.identity);

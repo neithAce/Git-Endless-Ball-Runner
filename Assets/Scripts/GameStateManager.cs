@@ -13,6 +13,7 @@ public enum GameState
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager instance;
+    public static bool startFromMenu = true;
 
     public GameObject mainMenuUI;
     public GameObject inGameMenuUI;
@@ -45,7 +46,8 @@ public class GameStateManager : MonoBehaviour
         }
         else
         {
-            ChangeState(GameState.MainMenu);
+            currentState = GameState.MainMenu;
+            HandleStateChange();
         }
     }
 
