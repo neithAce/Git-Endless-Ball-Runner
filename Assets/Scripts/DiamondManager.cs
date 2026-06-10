@@ -41,4 +41,16 @@ public class DiamondManager : MonoBehaviour
     {
         TxtDiamond.text = "Diamond " + totalDiamond;
     }
+
+    public void SpendDiamond(int amount)
+    {
+        totalDiamond -= amount;
+        if (totalDiamond < 0)
+        {
+            totalDiamond = 0;
+        }
+        PlayerPrefs.SetInt("Diamond", totalDiamond);
+        PlayerPrefs.Save();
+        TxtDiamond.text = "Diamond " + totalDiamond;
+    }
 }
